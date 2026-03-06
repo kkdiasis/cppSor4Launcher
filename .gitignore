@@ -1,0 +1,7 @@
+mods
+*.bkp
+*.json
+files
+.env
+.vscode
+build
