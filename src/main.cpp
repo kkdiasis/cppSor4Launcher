@@ -57,12 +57,15 @@ int main(int argc, char* argv[]) {
         InitWindow(WIN_WIDTH, WIN_HEIGHT, "SOR4 Mod Launcher");
         SetTargetFPS(60);
         SetWindowState(FLAG_WINDOW_UNDECORATED);
+        InitAudioDevice(); 
 
         fs::path ap = assets_path(argv[0]);
 
         GuiResources res;
         res.bg_texture = LoadTexture((ap / "background.png").string().c_str());
         res.fonte      = LoadFontEx((ap / "BebasNeue-Regular.ttf").string().c_str(), 128, nullptr, 0);
+        res.sfx_hover  = LoadSound((ap / "hover.wav").string().c_str());  // <- adicionar
+        res.sfx_click  = LoadSound((ap / "click.wav").string().c_str());  // <- adicionar
 
         // ---------------------------------------------------------------------
         // Run GUI
@@ -74,6 +77,9 @@ int main(int argc, char* argv[]) {
         // ---------------------------------------------------------------------
         UnloadFont(res.fonte);
         UnloadTexture(res.bg_texture);
+        UnloadSound(res.sfx_hover);   // <- adicionar
+        UnloadSound(res.sfx_click);   // <- adicionar
+        CloseAudioDevice();            // <- adicionar
         CloseWindow();
 
     } catch (const exception& e) {

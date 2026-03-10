@@ -50,6 +50,30 @@ bool desenhar_botao(const Font& fonte, const std::string& label,
     return hover && IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 }
 
+bool desenhar_botao_hover(const Font& fonte, const std::string& label,
+                           int x, int y, int larg, int alt, Color cor,
+                           bool& out_hover) {
+    Rectangle rect = {(float)x, (float)y, (float)larg, (float)alt};
+    out_hover      = CheckCollisionPointRec(GetMousePosition(), rect);
+
+    int tamanho  = out_hover ? 70 : 50;
+    int offset_x = out_hover ? 30 : 0;
+
+    if (out_hover) {
+        draw_text_glow(fonte, label,
+            x + 18 + offset_x,
+            y + alt / 2 - tamanho / 2,
+            (float)tamanho);
+    } else {
+        DrawTextEx(fonte, label.c_str(),
+            {(float)(x + 18), (float)(y + alt / 2 - tamanho / 2)},
+            (float)tamanho, 1, WHITE);
+    }
+
+    return out_hover && IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+}
+
+
 bool desenhar_botao_filled(const Font& fonte, const std::string& label,
                            int x, int y, int larg, int alt, Color cor) {
     Rectangle rect  = {(float)x, (float)y, (float)larg, (float)alt};

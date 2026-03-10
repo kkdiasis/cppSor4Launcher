@@ -47,9 +47,12 @@ constexpr Color BTN_CONFIG_C = {28,  42,  80,  255};
 // SHARED RESOURCES (set once in launcher, used everywhere)
 // =============================================================================
 
+// gui_common.h
 struct GuiResources {
     Texture2D bg_texture;
     Font      fonte;
+    Sound     sfx_hover;
+    Sound     sfx_click;
 };
 
 // =============================================================================
@@ -68,6 +71,10 @@ bool desenhar_botao(const Font& fonte, const std::string& label,
 // Texto puro com glow — launcher
 bool desenhar_botao(const Font& fonte, const std::string& label,
                     int x, int y, int larg, int alt, Color cor);
+
+bool desenhar_botao_hover(const Font& fonte, const std::string& label,
+                           int x, int y, int larg, int alt, Color cor,
+                           bool& out_hover);
 
 // Com fundo sólido — config
 bool desenhar_botao_filled(const Font& fonte, const std::string& label,
