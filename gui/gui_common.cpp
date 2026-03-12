@@ -27,16 +27,16 @@ void draw_text_glow(const Font& fonte, const std::string& texto, int x, int y, f
     DrawTextEx(fonte, t, {(float)x,     (float)y    }, tamanho,   1, {255, 255, 100, 255});
 }
 
-bool desenhar_botao(const Font& fonte, const std::string& label,
-                    int x, int y, int larg, int alt, Color cor) {
-    Rectangle rect  = {(float)x, (float)y, (float)larg, (float)alt};
-    Vector2   mouse = GetMousePosition();
-    bool      hover = CheckCollisionPointRec(mouse, rect);
+bool desenhar_botao_fixo_hover(const Font& fonte, const std::string& label,
+                           int x, int y, int larg, int alt, Color cor,
+                           bool& out_hover) {
+    Rectangle rect = {(float)x, (float)y, (float)larg, (float)alt};
+    out_hover      = CheckCollisionPointRec(GetMousePosition(), rect);
 
-    int   tamanho  = hover ? 50 : 30;
-    int   offset_x = hover ? 20 : 0;
+    int tamanho  = out_hover ? 50 : 30;
+    int offset_x = out_hover ? 30 : 0;
 
-    if (hover) {
+    if (out_hover) {
         draw_text_glow(fonte, label,
             x + 18 + offset_x,
             y + alt / 2 - tamanho / 2,
@@ -47,7 +47,7 @@ bool desenhar_botao(const Font& fonte, const std::string& label,
             (float)tamanho, 1, WHITE);
     }
 
-    return hover && IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    return out_hover && IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 }
 
 bool desenhar_botao_hover(const Font& fonte, const std::string& label,

@@ -65,12 +65,12 @@ void draw_background(const GuiResources& res);
 
 void draw_text_glow(const Font& fonte, const std::string& texto, int x, int y, float tamanho);
 
-bool desenhar_botao(const Font& fonte, const std::string& label,
-                    int x, int y, int larg, int alt, Color cor);
 
 // Texto puro com glow — launcher
-bool desenhar_botao(const Font& fonte, const std::string& label,
-                    int x, int y, int larg, int alt, Color cor);
+bool desenhar_botao_fixo_hover(const Font& fonte, const std::string& label,
+                           int x, int y, int larg, int alt, Color cor,
+                           bool& out_hover);
+
 
 bool desenhar_botao_hover(const Font& fonte, const std::string& label,
                            int x, int y, int larg, int alt, Color cor,

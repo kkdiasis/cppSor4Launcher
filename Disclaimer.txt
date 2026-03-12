@@ -1,0 +1,9 @@
+## Disclaimer
+
+This is an unofficial fan-made tool. It is not affiliated with, endorsed by, or connected to **Dotemu**, **Lizardcube**, or **Guard Crush Games**. Streets of Rage 4 and all related trademarks are property of their respective owners. This launcher does not distribute, modify, or reproduce any game files.
+
+---
+
+## License
+
+MIT License — see [LICENSE](LICENSE) for details.

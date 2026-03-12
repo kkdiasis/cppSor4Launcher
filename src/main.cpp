@@ -8,6 +8,7 @@
 #include "../gui/gui_common.h"
 #include "../gui/gui_launcher.h"
 #include "raylib.h"
+#include "admin.h"
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -22,11 +23,13 @@ static fs::path assets_path(const char* argv0) {
     return fs::absolute(fs::path(argv0)).parent_path() / "assets";
 }
 
+
 // =============================================================================
 // ENTRY POINT
 // =============================================================================
 
 int main(int argc, char* argv[]) {
+    garantir_admin();
     try {
         // ---------------------------------------------------------------------
         // Core setup
@@ -64,8 +67,10 @@ int main(int argc, char* argv[]) {
         GuiResources res;
         res.bg_texture = LoadTexture((ap / "background.png").string().c_str());
         res.fonte      = LoadFontEx((ap / "BebasNeue-Regular.ttf").string().c_str(), 128, nullptr, 0);
-        res.sfx_hover  = LoadSound((ap / "hover.wav").string().c_str());  // <- adicionar
-        res.sfx_click  = LoadSound((ap / "click.wav").string().c_str());  // <- adicionar
+        res.sfx_hover  = LoadSound((ap / "hover.wav").string().c_str());
+        SetSoundVolume(res.sfx_hover, 0.3f); 
+        res.sfx_click  = LoadSound((ap / "click.wav").string().c_str());
+        SetSoundVolume(res.sfx_click, 0.3f); 
 
         // ---------------------------------------------------------------------
         // Run GUI
@@ -77,9 +82,9 @@ int main(int argc, char* argv[]) {
         // ---------------------------------------------------------------------
         UnloadFont(res.fonte);
         UnloadTexture(res.bg_texture);
-        UnloadSound(res.sfx_hover);   // <- adicionar
-        UnloadSound(res.sfx_click);   // <- adicionar
-        CloseAudioDevice();            // <- adicionar
+        UnloadSound(res.sfx_hover);   
+        UnloadSound(res.sfx_click);   
+        CloseAudioDevice();           
         CloseWindow();
 
     } catch (const exception& e) {

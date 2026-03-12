@@ -3,7 +3,7 @@ CC       = gcc
 WINDRES  = windres
 CXXFLAGS = -std=c++17 -Wall -Wextra -I C:/raylib/raylib/src -MMD -MP
 CFLAGS   = -std=c99   -I C:/raylib/raylib/src -MMD -MP
-LDFLAGS  = -L C:/raylib/raylib/src -lraylib -lopengl32 -lgdi32 -lwinmm -lcomdlg32 -lole32 -lstdc++fs -lkernel32 -lshell32 -mwindows
+LDFLAGS  = -L C:/raylib/raylib/src -lraylib -lopengl32 -lgdi32 -lwinmm -lcomdlg32 -lole32 -lstdc++fs -lkernel32 -lshell32
 
 TARGET   = SOR4ModLauncher
 BUILDDIR = build
@@ -18,6 +18,7 @@ SRC_CPP = src/main.cpp \
           src/GameLauncher.cpp \
           src/config.cpp \
           src/utils.cpp \
+          src/admin.cpp \
           gui/gui_common.cpp \
           gui/gui_launcher.cpp \
           gui/gui_config.cpp

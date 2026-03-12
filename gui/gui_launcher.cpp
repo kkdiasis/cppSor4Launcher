@@ -108,6 +108,7 @@ void run_launcher(GuiResources& res,
             );
             ativo = caminho_original;
             launcher.lancar();
+            return; //Quit after load a start mod
         }
 
         y += ITEM_ALT + 6;
@@ -138,8 +139,9 @@ void run_launcher(GuiResources& res,
                     );
                     ativo = mod.caminho;
                     launcher.lancar();
+                    return; //quit after load  and start mod
                 }
-
+                
                 y += ITEM_ALT + 6;
             }
         }
@@ -153,7 +155,7 @@ void run_launcher(GuiResources& res,
 
         bool hov = false;
 
-        if (desenhar_botao_hover(res.fonte, "Restore original", MARGEM, y, ITEM_LARG, BTN_ALT, BTN_RESTAURAR, hov)) {
+        if (desenhar_botao_fixo_hover(res.fonte, "Restore original", MARGEM, y, ITEM_LARG, BTN_ALT, BTN_RESTAURAR, hov)) {
             PlaySound(res.sfx_click);
             bigfile_manager.restauracao_completa();
             mods_ativos.clear();
@@ -164,7 +166,7 @@ void run_launcher(GuiResources& res,
 
         y += BTN_ALT + 8;
 
-        if (desenhar_botao_hover(res.fonte, "Settings", MARGEM, y, ITEM_LARG, BTN_ALT, BTN_CONFIG_C, hov)) {
+        if (desenhar_botao_fixo_hover(res.fonte, "Settings", MARGEM, y, ITEM_LARG, BTN_ALT, BTN_CONFIG_C, hov)) {
             PlaySound(res.sfx_click);
             run_config(res, mod_manager, exe_path);
             recarregar_mods();
@@ -174,13 +176,14 @@ void run_launcher(GuiResources& res,
         else if (!hov && ultimo_hover == "__settings__") ultimo_hover = "";
 
         y += BTN_ALT + 8;
-
-        if (desenhar_botao_hover(res.fonte, "Quit", MARGEM, y, ITEM_LARG, BTN_ALT, {18, 24, 42, 255}, hov)) {
-            PlaySound(res.sfx_click);
-            break;
-        }
+        
         if (hov && ultimo_hover != "__quit__") { PlaySound(res.sfx_hover); ultimo_hover = "__quit__"; }
         else if (!hov && ultimo_hover == "__quit__") ultimo_hover = "";
+
+        if (desenhar_botao_fixo_hover(res.fonte, "Quit", MARGEM, y, ITEM_LARG, BTN_ALT, {18, 24, 42, 255}, hov)) {
+            PlaySound(res.sfx_click);
+            return;
+        }
 
         EndDrawing();
     }
